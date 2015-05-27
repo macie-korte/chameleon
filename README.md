@@ -26,3 +26,34 @@ Example code:
                       "content": 'Page not found'}]
     chameleon.start(settings_list, port=8000)
     
+## Check that your server is behaving as expected (optional)
+
+Using Python from a different process:
+
+    import requests
+    response = requests.get('http://localhost:8000/path1')
+    print response.status_code               # expect 200
+    print response.content                   # expect '{"foo": "bar"}'
+    print response.headers['content-type']   # expect 'application/json'
+    
+Or using the Linux shell:
+
+    $ curl "http://localhost:8000/path1/"
+    
+(expect {"foo": "bar"})
+
+## Replace the third-party URL with the mock one
+
+This will be done differently for each project.  Maybe you have an internal service which wraps the third-party service call where the URL of the third-party service can be set dynamically through the database or through the JSON/XML of the incoming request.
+
+## Test your internal flow
+
+Run your tests as usual.  Now the Chameleon mock server will be hit instead of the third-party system.  You will get back the hard-coded respinse content, status code, and content-type that you specified earlier.
+
+## Clean up
+
+Your automated test should end by shutting down the chameleon server:
+
+    chameleon.stop()
+    
+After this, the following tests will be able to start their own chameleon servers to mock out different services or the same service in a different way.  There is no way to update the behavior of a running chameleon server, but it is inexpensive to bring up and shut down.
