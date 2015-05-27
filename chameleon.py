@@ -1,6 +1,4 @@
 import cherrypy
-import requests
-import simplejson as json
 from   types import StringType, IntType
 
 
@@ -64,6 +62,7 @@ def stop():
     """ Kills the server for the mock service.
     """
     cherrypy.engine.stop()
+    cherrypy.server.httpserver = None
 
 
 def _get_cherrypy_page_handler(status_code, content_type, content):
