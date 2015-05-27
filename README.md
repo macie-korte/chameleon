@@ -4,7 +4,8 @@ It mocks the behavior of third-party communications so that third party services
 
 Here is an example scenario of how you would use this tool:
 
-## Identify a scenrio where Chameleon would be useful
+## Identify a scenario where Chameleon would be useful
+All of the following must be true for chameleon to be used:
 
 * Your communication to the third-party system uses HTTP requests
 * Your communication to the third-party system is synchronous - you expect a direct response to your call.
