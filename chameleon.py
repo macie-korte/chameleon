@@ -92,17 +92,24 @@ def _get_cherrypy_page_handler(status_code, content_type, content):
         @cherrypy.expose
         @cherrypy.tools.json_out()
         def index(self, **kwargs):
+            """Determines response of each route specified in the server
+            settings of the `start()` method """
             cherrypy.response.status = status_code
             cherrypy.response.headers['Content-Type'] = content_type
+
+            # TODO: this is really ugly, need to look more into cherrypy
             return json.loads(content) if 'json' in content_type else content
     return Foo()
 
 
-def _validate_response_settings(response_settings):
-    """ Iterates through all the settings to check:
+def _validate_response_settings(response_settings, strict_mode=False):
+    """Iterates through all the settings to check:
         - if they exist
         - if they are of the correct data type
     """
+    if strict_mode:
+        raise NotImplementedError
+
     error_message = "Please include a '{}' key for all response settings"
     required = ("url", "status_code", "content_type", "content",)
 
