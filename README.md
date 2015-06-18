@@ -1,4 +1,7 @@
 # Chameleon
+[![Build Status](https://travis-ci.org/agamdua/chameleon.svg?branch=master)](https://travis-ci.org/agamdua/chameleon)
+
+
 Chameleon is a test server which can be used with the Python test frameworks like Robot Framework.
 It mocks the behavior of third-party communications so that third party services do not need to be directly accessed during tests.  The goal is to remove outside dependencies from automated tests.
 
